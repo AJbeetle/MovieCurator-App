@@ -41,7 +41,7 @@ export default function Index() {
               ></SearchBar>
 
               <>
-                <Text className="text-lg text-white font-bold mt-5 mb-3"> Latest Movies</Text>
+                <Text className="text-lg text-white font-bold mt-5 mb-3"> Latest Movies, Trending Right Now !!!</Text>
                 <FlatList
                   data={movies}
                   renderItem={({item}) => (
