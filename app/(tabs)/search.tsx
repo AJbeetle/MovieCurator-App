@@ -16,15 +16,30 @@ const Search = () => {
     useEffect(function(){
         // debouncing search query : reducing too many api calls
 
-        const func = async() => {
+        // const func = async() => {
+        //     if(searchQuery.trim()){
+        //         await loadMovies();
+        //     }
+        //     else{
+        //         reset()
+        //     }
+        // }
+
+        const debounceFunc = setTimeout(async() => {
+            console.log("Debounced Query : ",searchQuery)
             if(searchQuery.trim()){
                 await loadMovies();
             }
             else{
                 reset()
             }
+        },1000);
+        // func();
+        // console.log(searchQuery)
+
+        return function(){
+            clearTimeout(debounceFunc)
         }
-        func();
     },[searchQuery])
 
     return (
@@ -81,6 +96,15 @@ const Search = () => {
                         </Text> 
                       }
                     </>
+                }
+                ListEmptyComponent={
+                    !moviesLoading && !moviesError ? (
+                        <View className="m-10 px-5">
+                            <Text className="text-center text-gray-500">
+                                {searchQuery.trim() ? "No Movies found" : "Search for a movie"}
+                            </Text>
+                        </View>
+                    ) : null
                 }
             />
         </View>
